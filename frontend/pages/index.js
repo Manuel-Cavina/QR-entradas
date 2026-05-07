@@ -6,14 +6,13 @@ const BACKEND = "https://project-y86k.onrender.com";
 export default function Home() {
   const [users, setUsers] = useState([]);
   const [result, setResult] = useState(null);
-  const [filter, setFilter] = useState("all");
 
   const fetchUsers = async () => {
     try {
       const res = await fetch(`${BACKEND}/users`);
       const data = await res.json();
       setUsers(data);
-    } catch (e) {
+    } catch {
       console.log("backend dormido");
     }
   };
@@ -25,7 +24,7 @@ export default function Home() {
   useEffect(() => {
     const scanner = new Html5QrcodeScanner("reader", {
       fps: 10,
-      qrbox: 250,
+      qrbox: 220,
     });
 
     scanner.render(async (text) => {
@@ -37,78 +36,95 @@ export default function Home() {
       setResult(data);
       fetchUsers();
 
-      setTimeout(() => setResult(null), 2000);
+      setTimeout(() => setResult(null), 1500);
     });
 
     return () => scanner.clear().catch(() => {});
   }, []);
 
-  const filteredUsers = users.filter((u) => {
-    if (filter === "present") return u.checkedIn;
-    if (filter === "pending") return !u.checkedIn;
-    return true;
-  });
-
-  const presentCount = users.filter((u) => u.checkedIn).length;
+  const total = users.length;
+  const registrados = users.filter(u => u.checkedIn).length;
+  const pendientes = total - registrados;
 
   return (
     <div style={styles.container}>
-      
+
       {/* HEADER */}
       <div style={styles.header}>
-        <h1>🎟 Check-in</h1>
-        <p>{presentCount} / {users.length} presentes</p>
+        <h2>Check-in</h2>
       </div>
 
-      {/* RESULTADO */}
+      {/* SCANNER */}
+      <div style={styles.scannerCard}>
+        <div id="reader"></div>
+      </div>
+
+      {/* RESULT */}
       {result && (
-        <div
-          style={{
-            ...styles.result,
-            background:
-              result.status === "success"
-                ? "#1f8f4f"
-                : result.status === "warning"
-                ? "#b38b00"
-                : "#b00020",
-          }}
-        >
-          <h2>
-            {result.status === "success"
-              ? "✔ Registrado"
+        <div style={{
+          ...styles.result,
+          background:
+            result.status === "success"
+              ? "#16a34a"
               : result.status === "warning"
-              ? "⚠ Ya ingresó"
-              : "❌ No válido"}
-          </h2>
-          <p>{result.user?.nombre}</p>
+              ? "#ca8a04"
+              : "#dc2626",
+        }}>
+          {result.user?.nombre}
         </div>
       )}
 
-      {/* SCANNER */}
-      <div id="reader" style={styles.scanner}></div>
-
-      {/* FILTROS */}
-      <div style={styles.filters}>
-        <button onClick={() => setFilter("all")}>Todos</button>
-        <button onClick={() => setFilter("present")}>Presentes</button>
-        <button onClick={() => setFilter("pending")}>Faltan</button>
+      {/* STATS */}
+      <div style={styles.stats}>
+        <Stat label="TOTAL" value={total} />
+        <Stat label="REGISTRADOS" value={registrados} color="#16a34a" />
+        <Stat label="PENDIENTES" value={pendientes} color="#f59e0b" />
       </div>
 
       {/* LISTA */}
       <div style={styles.list}>
-        {filteredUsers.map((u) => (
-          <div key={u.id} style={styles.item}>
-            <span>{u.nombre}</span>
-            <span
+        {users.map((u) => (
+          <div key={u.id} style={styles.card}>
+            
+            {/* iniciales */}
+            <div style={styles.avatar}>
+              {u.nombre
+                .split(" ")
+                .map(n => n[0])
+                .join("")
+                .slice(0,2)}
+            </div>
+
+            {/* info */}
+            <div style={{ flex: 1 }}>
+              <div style={styles.name}>{u.nombre}</div>
+              <div style={styles.sub}>#{u.numeroSorteo}</div>
+            </div>
+
+            {/* estado */}
+            <div
               style={{
-                color: u.checkedIn ? "#00ff9c" : "#ff4d4d",
-                fontWeight: "bold",
+                ...styles.badge,
+                background: u.checkedIn ? "#16a34a" : "#64748b",
               }}
             >
-              {u.checkedIn ? "✔" : "✘"}
-            </span>
+              {u.checkedIn ? "Registrado" : "Pendiente"}
+            </div>
+
           </div>
         ))}
+      </div>
+
+    </div>
+  );
+}
+
+function Stat({ label, value, color }) {
+  return (
+    <div style={styles.stat}>
+      <div style={{ fontSize: 12 }}>{label}</div>
+      <div style={{ fontSize: 22, fontWeight: "bold", color }}>
+        {value}
       </div>
     </div>
   );
@@ -116,40 +132,75 @@ export default function Home() {
 
 const styles = {
   container: {
-    background: "#0f172a",
-    color: "white",
+    background: "#f1f5f9",
     minHeight: "100vh",
-    padding: 20,
-    fontFamily: "Arial",
+    padding: 15,
+    fontFamily: "sans-serif",
   },
   header: {
     textAlign: "center",
-    marginBottom: 20,
+    marginBottom: 10,
   },
-  scanner: {
-    margin: "20px auto",
-    maxWidth: 300,
+  scannerCard: {
+    background: "white",
+    padding: 10,
+    borderRadius: 15,
+    marginBottom: 10,
   },
   result: {
-    padding: 15,
+    padding: 10,
     borderRadius: 10,
+    color: "white",
     textAlign: "center",
-    marginBottom: 20,
+    marginBottom: 10,
   },
-  filters: {
+  stats: {
     display: "flex",
     gap: 10,
-    justifyContent: "center",
-    marginBottom: 20,
+    marginBottom: 10,
+  },
+  stat: {
+    flex: 1,
+    background: "white",
+    padding: 10,
+    borderRadius: 10,
+    textAlign: "center",
   },
   list: {
-    maxHeight: 300,
-    overflowY: "scroll",
-  },
-  item: {
     display: "flex",
-    justifyContent: "space-between",
+    flexDirection: "column",
+    gap: 10,
+  },
+  card: {
+    display: "flex",
+    alignItems: "center",
+    background: "white",
     padding: 10,
-    borderBottom: "1px solid #1e293b",
+    borderRadius: 12,
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 10,
+    background: "#3b82f6",
+    color: "white",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 10,
+    fontWeight: "bold",
+  },
+  name: {
+    fontWeight: "bold",
+  },
+  sub: {
+    fontSize: 12,
+    color: "#64748b",
+  },
+  badge: {
+    padding: "5px 10px",
+    borderRadius: 10,
+    color: "white",
+    fontSize: 12,
   },
 };
