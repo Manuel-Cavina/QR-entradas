@@ -1,42 +1,32 @@
 const express = require('express');
 const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
+const PORT = process.env.PORT || 4000;
 
 // middlewares
 app.use(cors());
 app.use(express.json());
 
-const cors = require("cors");
-
-app.use(cors({
-  origin: "*"
-}));
-
-// memoria (para el evento alcanza)
-const fs = require('fs');
-const path = require('path');
-
 let users = [];
 
+// 🔥 CARGA DE ARCHIVO
 try {
-  const filePath = path.join(__dirname, './participantes.json');
-  users = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-  console.log("Participantes cargados:", users.length);
+  const filePath = path.join(__dirname, 'participantes.json');
+  const raw = fs.readFileSync(filePath, 'utf-8');
+
+  users = JSON.parse(raw).map(u => ({
+    ...u,
+    checkedIn: u.checkedIn || false
+  }));
+
+  console.log("✅ Participantes cargados:", users.length);
 } catch (err) {
-  console.log("No se pudo cargar participantes.json");
+  console.log("❌ Error cargando participantes.json:");
+  console.log(err.message);
 }
-
-
-// 🔹 CARGAR PARTICIPANTES
-app.post('/load', (req, res) => {
-  users = req.body;
-
-  res.json({
-    message: "Participantes cargados",
-    total: users.length
-  });
-});
 
 // 🔹 VER LISTA
 app.get('/users', (req, res) => {
@@ -45,7 +35,7 @@ app.get('/users', (req, res) => {
 
 // 🔹 CHECK-IN
 app.get('/checkin/:id', (req, res) => {
-  const user = users.find(u => u.id === req.params.id);
+  const user = users.find(u => String(u.id) === String(req.params.id));
 
   if (!user) {
     return res.json({ status: 'error', message: 'No encontrado' });
@@ -64,7 +54,11 @@ app.get('/checkin/:id', (req, res) => {
   });
 });
 
-// 🚀 levantar servidor
-app.listen(4000, () => {
-  console.log('Servidor corriendo en http://localhost:4000');
+// 🔹 TEST
+app.get('/', (req, res) => {
+  res.send("Backend funcionando 🚀");
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en puerto ${PORT}`);
 });
