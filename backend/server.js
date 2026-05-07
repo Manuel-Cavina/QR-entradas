@@ -1,70 +1,86 @@
-const express = require('express');
-const cors = require('cors');
+const express = require("express");
+const cors = require("cors");
+const fs = require("fs");
+const path = require("path");
 
 const app = express();
+const PORT = process.env.PORT || 4000;
 
-// middlewares
-app.use(cors());
-app.use(express.json());
-
-const cors = require("cors");
-
+// ✅ CORS (CLAVE para que Vercel funcione)
 app.use(cors({
   origin: "*"
 }));
 
-// memoria (para el evento alcanza)
-const fs = require('fs');
-const path = require('path');
+app.use(express.json());
 
-let users = [];
+// 📁 archivo donde guardamos estado (simple)
+const DATA_PATH = path.join(__dirname, "data.json");
 
-try {
-  const filePath = path.join(__dirname, '../output/participantes.json');
-  users = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-  console.log("Participantes cargados:", users.length);
-} catch (err) {
-  console.log("No se pudo cargar participantes.json");
-}
+// 🔹 función para leer usuarios
+const readUsers = () => {
+  if (!fs.existsSync(DATA_PATH)) return [];
+  const data = fs.readFileSync(DATA_PATH);
+  return JSON.parse(data);
+};
 
+// 🔹 función para guardar usuarios
+const saveUsers = (users) => {
+  fs.writeFileSync(DATA_PATH, JSON.stringify(users, null, 2));
+};
 
-// 🔹 CARGAR PARTICIPANTES
-app.post('/load', (req, res) => {
-  users = req.body;
+// 🔹 endpoint para cargar usuarios iniciales (solo 1 vez)
+app.post("/load", (req, res) => {
+  const users = req.body;
 
-  res.json({
-    message: "Participantes cargados",
-    total: users.length
-  });
+  const initialUsers = users.map((u) => ({
+    ...u,
+    checkedIn: false
+  }));
+
+  saveUsers(initialUsers);
+
+  res.json({ message: "Usuarios cargados" });
 });
 
-// 🔹 VER LISTA
-app.get('/users', (req, res) => {
+// 🔹 obtener todos los usuarios
+app.get("/users", (req, res) => {
+  const users = readUsers();
   res.json(users);
 });
 
-// 🔹 CHECK-IN
-app.get('/checkin/:id', (req, res) => {
-  const user = users.find(u => u.id === req.params.id);
+// 🔹 check-in por QR
+app.get("/checkin/:id", (req, res) => {
+  const { id } = req.params;
+
+  const users = readUsers();
+  const user = users.find((u) => u.id === id);
 
   if (!user) {
-    return res.json({ status: 'error', message: 'No encontrado' });
+    return res.json({ status: "error" });
   }
 
   if (user.checkedIn) {
-    return res.json({ status: 'warning', message: 'Ya registrado', user });
+    return res.json({
+      status: "warning",
+      user
+    });
   }
 
   user.checkedIn = true;
+  saveUsers(users);
 
   return res.json({
-    status: 'success',
-    message: 'Check-in OK',
+    status: "success",
     user
   });
 });
 
+// 🔹 endpoint simple para test
+app.get("/", (req, res) => {
+  res.send("Backend funcionando 🚀");
+});
+
 // 🚀 levantar servidor
-app.listen(4000, () => {
-  console.log('Servidor corriendo en http://localhost:4000');
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en puerto ${PORT}`);
 });
