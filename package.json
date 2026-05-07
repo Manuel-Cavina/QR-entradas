@@ -1,0 +1,16 @@
+{
+  "name": "qr-checkin-app",
+  "version": "1.0.0",
+  "description": "Sistema QR evento",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "generate": "node generarQR.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "xlsx": "^0.18.5",
+    "qrcode": "^1.5.4"
+  }
+}
