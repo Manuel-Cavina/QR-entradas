@@ -14,10 +14,14 @@ export default function Home() {
 
   // cargar lista inicial
   const fetchUsers = async () => {
+  try {
     const res = await fetch(`${BACKEND}/users`);
     const data = await res.json();
     setUsers(data);
-  };
+  } catch (e) {
+    console.log("backend dormido...");
+  }
+};
 
   useEffect(() => {
     fetchUsers();

@@ -7,6 +7,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const cors = require("cors");
+
+app.use(cors({
+  origin: "*"
+}));
+
 // memoria (para el evento alcanza)
 const fs = require('fs');
 const path = require('path');
