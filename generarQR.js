@@ -21,7 +21,7 @@ async function generar() {
   for (const row of data) {
     const id = Math.random().toString(36).substring(2, 10);
 
-    const checkinURL = `https://tuapp.com/checkin/${id}`;
+    const checkinURL = `https://project-y86k.onrender.com/checkin/{id}`;
 
     // 📸 Generar QR
     const qrImage = await QRCode.toDataURL(checkinURL);
