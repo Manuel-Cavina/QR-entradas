@@ -20,7 +20,7 @@ const path = require('path');
 let users = [];
 
 try {
-  const filePath = path.join(__dirname, '../output/participantes.json');
+  const filePath = path.join(__dirname, './participantes.json');
   users = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
   console.log("Participantes cargados:", users.length);
 } catch (err) {
