@@ -9,10 +9,17 @@ app.use(express.json());
 
 // memoria (para el evento alcanza)
 const fs = require('fs');
+const path = require('path');
 
-let users = JSON.parse(
-  fs.readFileSync('../output/participantes.json')
-);
+let users = [];
+
+try {
+  const filePath = path.join(__dirname, '../output/participantes.json');
+  users = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+  console.log("Participantes cargados:", users.length);
+} catch (err) {
+  console.log("No se pudo cargar participantes.json");
+}
 
 
 // 🔹 CARGAR PARTICIPANTES
