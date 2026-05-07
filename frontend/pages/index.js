@@ -6,15 +6,15 @@ const BACKEND = "https://project-y86k.onrender.com";
 export default function Home() {
   const [users, setUsers] = useState([]);
   const [result, setResult] = useState(null);
+  const [filter, setFilter] = useState("all");
 
-  // 🔹 traer usuarios
   const fetchUsers = async () => {
     try {
       const res = await fetch(`${BACKEND}/users`);
       const data = await res.json();
       setUsers(data);
     } catch (e) {
-      console.log("Backend dormido...");
+      console.log("backend dormido");
     }
   };
 
@@ -22,101 +22,90 @@ export default function Home() {
     fetchUsers();
   }, []);
 
-  // 🔹 scanner QR
   useEffect(() => {
-    const scanner = new Html5QrcodeScanner(
-      "reader",
-      { fps: 10, qrbox: 250 },
-      false
-    );
+    const scanner = new Html5QrcodeScanner("reader", {
+      fps: 10,
+      qrbox: 250,
+    });
 
-    scanner.render(
-      async (decodedText) => {
-        try {
-          const id = decodedText.split("/").pop();
+    scanner.render(async (text) => {
+      const id = text.split("/").pop();
 
-          const res = await fetch(`${BACKEND}/checkin/${id}`);
-          const data = await res.json();
+      const res = await fetch(`${BACKEND}/checkin/${id}`);
+      const data = await res.json();
 
-          setResult(data);
-          fetchUsers();
+      setResult(data);
+      fetchUsers();
 
-          setTimeout(() => {
-            setResult(null);
-          }, 2000);
-        } catch (err) {
-          console.error(err);
-        }
-      },
-      () => {}
-    );
+      setTimeout(() => setResult(null), 2000);
+    });
 
-    return () => {
-      scanner.clear().catch(() => {});
-    };
+    return () => scanner.clear().catch(() => {});
   }, []);
 
+  const filteredUsers = users.filter((u) => {
+    if (filter === "present") return u.checkedIn;
+    if (filter === "pending") return !u.checkedIn;
+    return true;
+  });
+
+  const presentCount = users.filter((u) => u.checkedIn).length;
+
   return (
-    <div style={{ padding: 20, fontFamily: "Arial" }}>
-      <h1>🎟 Check-in Evento</h1>
+    <div style={styles.container}>
+      
+      {/* HEADER */}
+      <div style={styles.header}>
+        <h1>🎟 Check-in</h1>
+        <p>{presentCount} / {users.length} presentes</p>
+      </div>
 
-      {/* 🔹 Scanner */}
-      <div id="reader" style={{ width: "300px", marginBottom: 20 }} />
-
-      {/* 🔹 Resultado */}
+      {/* RESULTADO */}
       {result && (
         <div
           style={{
-            padding: 15,
-            marginBottom: 20,
+            ...styles.result,
             background:
               result.status === "success"
-                ? "#d4edda"
+                ? "#1f8f4f"
                 : result.status === "warning"
-                ? "#fff3cd"
-                : "#f8d7da",
-            color: "#000",
-            borderRadius: 8,
+                ? "#b38b00"
+                : "#b00020",
           }}
         >
           <h2>
             {result.status === "success"
-              ? "✅ Participante presente"
+              ? "✔ Registrado"
               : result.status === "warning"
-              ? "⚠️ Ya escaneado"
+              ? "⚠ Ya ingresó"
               : "❌ No válido"}
           </h2>
-
           <p>{result.user?.nombre}</p>
-          <p>N° {result.user?.numeroSorteo}</p>
         </div>
       )}
 
-      {/* 🔹 Lista */}
-      <h2>Lista</h2>
+      {/* SCANNER */}
+      <div id="reader" style={styles.scanner}></div>
 
-      <div>
-        {users.map((u) => (
-          <div
-            key={u.id}
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              padding: "8px 12px",
-              marginBottom: 5,
-              background: "#f4f4f4",
-              borderRadius: 6,
-            }}
-          >
+      {/* FILTROS */}
+      <div style={styles.filters}>
+        <button onClick={() => setFilter("all")}>Todos</button>
+        <button onClick={() => setFilter("present")}>Presentes</button>
+        <button onClick={() => setFilter("pending")}>Faltan</button>
+      </div>
+
+      {/* LISTA */}
+      <div style={styles.list}>
+        {filteredUsers.map((u) => (
+          <div key={u.id} style={styles.item}>
             <span>{u.nombre}</span>
-
             <span
               style={{
-                color: u.checkedIn ? "green" : "red",
+                color: u.checkedIn ? "#00ff9c" : "#ff4d4d",
                 fontWeight: "bold",
               }}
             >
-              {u.checkedIn ? "✔" : "❌"} {u.numeroSorteo}
+              {u.checkedIn ? "✔" : "✘"}
             </span>
           </div>
         ))}
@@ -124,3 +113,43 @@ export default function Home() {
     </div>
   );
 }
+
+const styles = {
+  container: {
+    background: "#0f172a",
+    color: "white",
+    minHeight: "100vh",
+    padding: 20,
+    fontFamily: "Arial",
+  },
+  header: {
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  scanner: {
+    margin: "20px auto",
+    maxWidth: 300,
+  },
+  result: {
+    padding: 15,
+    borderRadius: 10,
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  filters: {
+    display: "flex",
+    gap: 10,
+    justifyContent: "center",
+    marginBottom: 20,
+  },
+  list: {
+    maxHeight: 300,
+    overflowY: "scroll",
+  },
+  item: {
+    display: "flex",
+    justifyContent: "space-between",
+    padding: 10,
+    borderBottom: "1px solid #1e293b",
+  },
+};
