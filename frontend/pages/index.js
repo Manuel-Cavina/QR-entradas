@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
-import { QrReader } from "react-qr-reader";
+import dynamic from "next/dynamic";
 
-const BACKEND = "https://qr-entradas.onrender.com"; // CAMBIAR POR TU URL
+const QrReader = dynamic(
+  () => import("react-qr-reader").then((mod) => mod.QrReader),
+  { ssr: false }
+);
+const BACKEND = "https://project-y86k.onrender.com";
 
 export default function Home() {
   const [result, setResult] = useState(null);

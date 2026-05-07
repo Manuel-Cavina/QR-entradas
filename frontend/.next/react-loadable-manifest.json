@@ -1,1 +1,8 @@
-{}
+{
+  "pages\\index.js -> react-qr-reader": {
+    "id": "pages\\index.js -> react-qr-reader",
+    "files": [
+      "static/chunks/node_modules_pnpm_react-qr-reader_3_0_0-beta-_a567c740935a1731bd9aa0a358846a5f_node_modules_r-ca342b.js"
+    ]
+  }
+}
