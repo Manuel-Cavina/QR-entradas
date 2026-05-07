@@ -132,75 +132,96 @@ function Stat({ label, value, color }) {
 
 const styles = {
   container: {
-    background: "#f1f5f9",
+    background: "#f8fafc",
     minHeight: "100vh",
     padding: 15,
     fontFamily: "sans-serif",
+    color: "#000", // 🔥 TODO el texto negro
   },
+
   header: {
     textAlign: "center",
-    marginBottom: 10,
+    marginBottom: 15,
+    color: "#000",
   },
+
   scannerCard: {
-    background: "white",
+    background: "#fff",
     padding: 10,
     borderRadius: 15,
-    marginBottom: 10,
+    marginBottom: 15,
+    boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
   },
+
   result: {
     padding: 10,
     borderRadius: 10,
-    color: "white",
     textAlign: "center",
-    marginBottom: 10,
+    marginBottom: 15,
+    color: "#fff", // acá sí blanco porque es estado
+    fontWeight: "bold",
   },
+
   stats: {
     display: "flex",
     gap: 10,
-    marginBottom: 10,
+    marginBottom: 15,
   },
+
   stat: {
     flex: 1,
-    background: "white",
-    padding: 10,
-    borderRadius: 10,
+    background: "#fff",
+    padding: 12,
+    borderRadius: 12,
     textAlign: "center",
+    color: "#000",
+    boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
   },
+
   list: {
     display: "flex",
     flexDirection: "column",
     gap: 10,
   },
+
   card: {
     display: "flex",
     alignItems: "center",
-    background: "white",
-    padding: 10,
+    background: "#fff",
+    padding: 12,
     borderRadius: 12,
+    color: "#000",
+    boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
   },
+
   avatar: {
-    width: 40,
-    height: 40,
+    width: 42,
+    height: 42,
     borderRadius: 10,
-    background: "#3b82f6",
-    color: "white",
+    background: "#e2e8f0", // 🔥 gris elegante en vez de azul fuerte
+    color: "#000",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     marginRight: 10,
     fontWeight: "bold",
   },
+
   name: {
-    fontWeight: "bold",
+    fontWeight: "600",
+    color: "#000",
   },
+
   sub: {
     fontSize: 12,
     color: "#64748b",
   },
+
   badge: {
-    padding: "5px 10px",
+    padding: "6px 10px",
     borderRadius: 10,
-    color: "white",
+    color: "#fff",
     fontSize: 12,
+    fontWeight: "bold",
   },
 };
