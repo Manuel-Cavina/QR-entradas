@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Html5Qrcode } from "html5-qrcode";
 
 const BACKEND = "https://project-y86k.onrender.com";
@@ -6,14 +6,17 @@ const BACKEND = "https://project-y86k.onrender.com";
 export default function Home() {
 
   const [users, setUsers] = useState([]);
-  const [scanning, setScanning] = useState(true);
   const [selectedUser, setSelectedUser] = useState(null);
-
   const [combo, setCombo] = useState({
     bebidaCaliente: "",
     bebidaFria: "",
     comida: ""
   });
+
+  const [scanning, setScanning] = useState(true);
+  const [lastScan, setLastScan] = useState(null);
+
+  const scannerRef = useRef(null);
 
   // 🔹 traer usuarios
   const fetchUsers = async () => {
@@ -26,24 +29,35 @@ export default function Home() {
     fetchUsers();
   }, []);
 
-  // 🔹 SCANNER
+  // 🔹 SCANNER (ESTABLE)
   useEffect(() => {
     if (!scanning) return;
 
     const scanner = new Html5Qrcode("reader");
+    scannerRef.current = scanner;
 
     scanner.start(
       { facingMode: "environment" },
       { fps: 10, qrbox: 250 },
-      (decodedText) => {
-        handleScan(decodedText);
-        scanner.stop();
+      async (decodedText) => {
+
+        // evitar duplicados
+        if (decodedText === lastScan) return;
+
+        setLastScan(decodedText);
+
+        await handleScan(decodedText);
+
+        // resetear para permitir escanear de nuevo
+        setTimeout(() => setLastScan(null), 2000);
       },
       () => {}
     );
 
     return () => {
-      scanner.stop().catch(() => {});
+      if (scannerRef.current) {
+        scannerRef.current.stop().catch(() => {});
+      }
     };
   }, [scanning]);
 
@@ -62,13 +76,12 @@ export default function Home() {
         bebidaFria: data.user.combo?.bebidaFria || "",
         comida: data.user.combo?.comida || ""
       });
-
-      setScanning(false);
     }
 
     fetchUsers();
   };
 
+  // 🔹 STATS
   const total = users.length;
   const registrados = users.filter(u => u.checkedIn).length;
   const pendientes = total - registrados;
@@ -79,7 +92,7 @@ export default function Home() {
       <h1>Check-in ESDEC</h1>
 
       {/* SCANNER */}
-      {scanning && <div id="reader" style={styles.reader}></div>}
+      <div id="reader" style={styles.reader}></div>
 
       {/* STATS */}
       <div style={styles.stats}>
@@ -97,32 +110,50 @@ export default function Home() {
       </div>
 
       {/* LISTA */}
-      <div>
+      <div style={{ marginTop: 20 }}>
         {users.map(u => (
-          <div key={u.id} style={styles.card}>
+  <div key={u.id} style={styles.card}>
 
-            <div>
-              <strong>{u.nombre}</strong>
-              <div>#{u.numeroSorteo}</div>
+    <div>
+      <strong>{u.nombre}</strong>
+      <div>#{u.numeroSorteo}</div>
 
-              <div style={styles.comboText}>
-                ☕ {u.combo?.bebidaCaliente || "Sin caliente"} |
-                🧊 {u.combo?.bebidaFria || "Sin fría"} |
-                🍽 {u.combo?.comida || "Sin comida"}
-              </div>
-            </div>
+      <div style={styles.comboText}>
+        ☕ {u.combo?.bebidaCaliente || "Sin caliente"} |
+        🧊 {u.combo?.bebidaFria || "Sin fría"} |
+        🍽 {u.combo?.comida || "Sin comida"}
+      </div>
+    </div>
 
-            <div style={{
-              background: u.checkedIn ? "#22c55e" : "#64748b",
-              color: "#fff",
-              padding: "5px 10px",
-              borderRadius: 20
-            }}>
-              {u.checkedIn ? "Registrado" : "Pendiente"}
-            </div>
+    <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
 
-          </div>
-        ))}
+      <div style={{
+        background: u.checkedIn ? "#22c55e" : "#64748b",
+        color: "#fff",
+        padding: "5px 10px",
+        borderRadius: 20,
+        textAlign: "center"
+      }}>
+        {u.checkedIn ? "Registrado" : "Pendiente"}
+      </div>
+
+      {/* 🔥 BOTÓN WHATSAPP */}
+      {u.whatsappLink && (
+        <a
+          href={u.whatsappLink}
+          target="_blank"
+          style={styles.btnWsp}
+        >
+          💬 WhatsApp
+        </a>
+      )}
+
+    </div>
+
+  </div>
+))}
+
+        
       </div>
 
       {/* MODAL */}
@@ -161,6 +192,7 @@ export default function Home() {
             />
 
             <button
+              style={styles.btn}
               onClick={async () => {
                 await fetch(`${BACKEND}/combo/${selectedUser.id}`, {
                   method: "POST",
@@ -171,7 +203,6 @@ export default function Home() {
                 });
 
                 setSelectedUser(null);
-                setScanning(true);
                 fetchUsers();
               }}
             >
@@ -179,10 +210,8 @@ export default function Home() {
             </button>
 
             <button
-              onClick={() => {
-                setSelectedUser(null);
-                setScanning(true);
-              }}
+              style={styles.btnCancel}
+              onClick={() => setSelectedUser(null)}
             >
               Cancelar
             </button>
@@ -257,5 +286,23 @@ const styles = {
     flexDirection: "column",
     gap: 10,
     width: 300
+  },
+
+  btn: {
+    background: "#22c55e",
+    color: "#fff",
+    border: "none",
+    padding: 10,
+    borderRadius: 8,
+    cursor: "pointer"
+  },
+
+  btnCancel: {
+    background: "#ef4444",
+    color: "#fff",
+    border: "none",
+    padding: 10,
+    borderRadius: 8,
+    cursor: "pointer"
   }
 };
