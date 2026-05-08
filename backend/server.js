@@ -88,4 +88,5 @@ app.post("/reset", (req, res) => {
 
 app.listen(4000, () => {
   console.log("Servidor corriendo en http://localhost:4000");
+  console.log(users);
 });
