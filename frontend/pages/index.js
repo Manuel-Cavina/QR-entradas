@@ -1,46 +1,73 @@
 import { useEffect, useState } from "react";
-import { Html5QrcodeScanner } from "html5-qrcode";
+import { Html5Qrcode } from "html5-qrcode";
 
 const BACKEND = "https://project-y86k.onrender.com";
 
 export default function Home() {
-  const [users, setUsers] = useState([]);
-  const [result, setResult] = useState(null);
 
+  const [users, setUsers] = useState([]);
+  const [scanning, setScanning] = useState(true);
+  const [selectedUser, setSelectedUser] = useState(null);
+
+  const [combo, setCombo] = useState({
+    bebidaCaliente: "",
+    bebidaFria: "",
+    comida: ""
+  });
+
+  // 🔹 traer usuarios
   const fetchUsers = async () => {
-    try {
-      const res = await fetch(`${BACKEND}/users`);
-      const data = await res.json();
-      setUsers(data);
-    } catch {
-      console.log("backend dormido");
-    }
+    const res = await fetch(`${BACKEND}/users`);
+    const data = await res.json();
+    setUsers(data);
   };
 
   useEffect(() => {
     fetchUsers();
   }, []);
 
+  // 🔹 SCANNER
   useEffect(() => {
-    const scanner = new Html5QrcodeScanner("reader", {
-      fps: 10,
-      qrbox: 220,
-    });
+    if (!scanning) return;
 
-    scanner.render(async (text) => {
-      const id = text.split("/").pop();
+    const scanner = new Html5Qrcode("reader");
 
-      const res = await fetch(`${BACKEND}/checkin/${id}`);
-      const data = await res.json();
+    scanner.start(
+      { facingMode: "environment" },
+      { fps: 10, qrbox: 250 },
+      (decodedText) => {
+        handleScan(decodedText);
+        scanner.stop();
+      },
+      () => {}
+    );
 
-      setResult(data);
-      fetchUsers();
+    return () => {
+      scanner.stop().catch(() => {});
+    };
+  }, [scanning]);
 
-      setTimeout(() => setResult(null), 1500);
-    });
+  // 🔹 CUANDO ESCANEÁS
+  const handleScan = async (text) => {
+    const id = text.split("/").pop();
 
-    return () => scanner.clear().catch(() => {});
-  }, []);
+    const res = await fetch(`${BACKEND}/checkin/${id}`);
+    const data = await res.json();
+
+    if (data.user) {
+      setSelectedUser(data.user);
+
+      setCombo({
+        bebidaCaliente: data.user.combo?.bebidaCaliente || "",
+        bebidaFria: data.user.combo?.bebidaFria || "",
+        comida: data.user.combo?.comida || ""
+      });
+
+      setScanning(false);
+    }
+
+    fetchUsers();
+  };
 
   const total = users.length;
   const registrados = users.filter(u => u.checkedIn).length;
@@ -49,65 +76,48 @@ export default function Home() {
   return (
     <div style={styles.container}>
 
-      {/* HEADER */}
-      <div style={styles.header}>
-        <h2>Check-in</h2>
-      </div>
+      <h1>Check-in ESDEC</h1>
 
       {/* SCANNER */}
-      <div style={styles.scannerCard}>
-        <div id="reader"></div>
-      </div>
-
-      {/* RESULT */}
-      {result && (
-        <div style={{
-          ...styles.result,
-          background:
-            result.status === "success"
-              ? "#16a34a"
-              : result.status === "warning"
-              ? "#ca8a04"
-              : "#dc2626",
-        }}>
-          {result.user?.nombre}
-        </div>
-      )}
+      {scanning && <div id="reader" style={styles.reader}></div>}
 
       {/* STATS */}
       <div style={styles.stats}>
-        <Stat label="TOTAL" value={total} />
-        <Stat label="REGISTRADOS" value={registrados} color="#16a34a" />
-        <Stat label="PENDIENTES" value={pendientes} color="#f59e0b" />
+        <div style={styles.box}>
+          TOTAL<br /><strong>{total}</strong>
+        </div>
+
+        <div style={styles.box}>
+          REGISTRADOS<br /><strong style={{ color: "green" }}>{registrados}</strong>
+        </div>
+
+        <div style={styles.box}>
+          PENDIENTES<br /><strong style={{ color: "orange" }}>{pendientes}</strong>
+        </div>
       </div>
 
       {/* LISTA */}
-      <div style={styles.list}>
-        {users.map((u) => (
+      <div>
+        {users.map(u => (
           <div key={u.id} style={styles.card}>
-            
-            {/* iniciales */}
-            <div style={styles.avatar}>
-              {u.nombre
-                .split(" ")
-                .map(n => n[0])
-                .join("")
-                .slice(0,2)}
+
+            <div>
+              <strong>{u.nombre}</strong>
+              <div>#{u.numeroSorteo}</div>
+
+              <div style={styles.comboText}>
+                ☕ {u.combo?.bebidaCaliente || "Sin caliente"} |
+                🧊 {u.combo?.bebidaFria || "Sin fría"} |
+                🍽 {u.combo?.comida || "Sin comida"}
+              </div>
             </div>
 
-            {/* info */}
-            <div style={{ flex: 1 }}>
-              <div style={styles.name}>{u.nombre}</div>
-              <div style={styles.sub}>#{u.numeroSorteo}</div>
-            </div>
-
-            {/* estado */}
-            <div
-              style={{
-                ...styles.badge,
-                background: u.checkedIn ? "#16a34a" : "#64748b",
-              }}
-            >
+            <div style={{
+              background: u.checkedIn ? "#22c55e" : "#64748b",
+              color: "#fff",
+              padding: "5px 10px",
+              borderRadius: 20
+            }}>
               {u.checkedIn ? "Registrado" : "Pendiente"}
             </div>
 
@@ -115,113 +125,137 @@ export default function Home() {
         ))}
       </div>
 
-    </div>
-  );
-}
+      {/* MODAL */}
+      {selectedUser && (
+        <div style={styles.modal}>
 
-function Stat({ label, value, color }) {
-  return (
-    <div style={styles.stat}>
-      <div style={{ fontSize: 12 }}>{label}</div>
-      <div style={{ fontSize: 22, fontWeight: "bold", color }}>
-        {value}
-      </div>
+          <div style={styles.modalCard}>
+
+            <h2>{selectedUser.nombre}</h2>
+            <p>N° {selectedUser.numeroSorteo}</p>
+
+            <h4>Combo</h4>
+
+            <input
+              placeholder="Café caliente"
+              value={combo.bebidaCaliente}
+              onChange={(e) =>
+                setCombo({ ...combo, bebidaCaliente: e.target.value })
+              }
+            />
+
+            <input
+              placeholder="Café frío"
+              value={combo.bebidaFria}
+              onChange={(e) =>
+                setCombo({ ...combo, bebidaFria: e.target.value })
+              }
+            />
+
+            <input
+              placeholder="Comida"
+              value={combo.comida}
+              onChange={(e) =>
+                setCombo({ ...combo, comida: e.target.value })
+              }
+            />
+
+            <button
+              onClick={async () => {
+                await fetch(`${BACKEND}/combo/${selectedUser.id}`, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify(combo)
+                });
+
+                setSelectedUser(null);
+                setScanning(true);
+                fetchUsers();
+              }}
+            >
+              Guardar
+            </button>
+
+            <button
+              onClick={() => {
+                setSelectedUser(null);
+                setScanning(true);
+              }}
+            >
+              Cancelar
+            </button>
+
+          </div>
+
+        </div>
+      )}
+
     </div>
   );
 }
 
 const styles = {
   container: {
-    background: "#f8fafc",
-    minHeight: "100vh",
-    padding: 15,
+    padding: 20,
     fontFamily: "sans-serif",
-    color: "#000", // 🔥 TODO el texto negro
+    color: "#000"
   },
 
-  header: {
-    textAlign: "center",
-    marginBottom: 15,
-    color: "#000",
-  },
-
-  scannerCard: {
-    background: "#fff",
-    padding: 10,
-    borderRadius: 15,
-    marginBottom: 15,
-    boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
-  },
-
-  result: {
-    padding: 10,
-    borderRadius: 10,
-    textAlign: "center",
-    marginBottom: 15,
-    color: "#fff", // acá sí blanco porque es estado
-    fontWeight: "bold",
+  reader: {
+    width: 300,
+    margin: "20px auto"
   },
 
   stats: {
     display: "flex",
     gap: 10,
-    marginBottom: 15,
+    marginTop: 20
   },
 
-  stat: {
+  box: {
     flex: 1,
-    background: "#fff",
-    padding: 12,
-    borderRadius: 12,
-    textAlign: "center",
-    color: "#000",
-    boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
-  },
-
-  list: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 10,
+    background: "#f1f5f9",
+    padding: 10,
+    borderRadius: 10,
+    textAlign: "center"
   },
 
   card: {
-    display: "flex",
-    alignItems: "center",
     background: "#fff",
-    padding: 12,
-    borderRadius: 12,
-    color: "#000",
-    boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
-  },
-
-  avatar: {
-    width: 42,
-    height: 42,
+    padding: 15,
     borderRadius: 10,
-    background: "#e2e8f0", // 🔥 gris elegante en vez de azul fuerte
-    color: "#000",
+    marginBottom: 10,
     display: "flex",
-    alignItems: "center",
+    justifyContent: "space-between",
+    boxShadow: "0 2px 6px rgba(0,0,0,0.05)"
+  },
+
+  comboText: {
+    fontSize: 12,
+    color: "#555"
+  },
+
+  modal: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    background: "rgba(0,0,0,0.4)",
+    display: "flex",
     justifyContent: "center",
-    marginRight: 10,
-    fontWeight: "bold",
+    alignItems: "center"
   },
 
-  name: {
-    fontWeight: "600",
-    color: "#000",
-  },
-
-  sub: {
-    fontSize: 12,
-    color: "#64748b",
-  },
-
-  badge: {
-    padding: "6px 10px",
-    borderRadius: 10,
-    color: "#fff",
-    fontSize: 12,
-    fontWeight: "bold",
-  },
+  modalCard: {
+    background: "#fff",
+    padding: 20,
+    borderRadius: 15,
+    display: "flex",
+    flexDirection: "column",
+    gap: 10,
+    width: 300
+  }
 };

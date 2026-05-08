@@ -1,0 +1,371 @@
+[
+  {
+    "id": "uyvo6i8n",
+    "nombre": "Agustín Fernandez",
+    "telefono": 543834791128,
+    "numeroSorteo": 1,
+    "qrFile": "Agustín_Fernandez.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493834791128?text=Hola%20Agust%C3%ADn%20Fernandez%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "eh8pg7fu",
+    "nombre": "Andrés ",
+    "telefono": 543516209967,
+    "numeroSorteo": 2,
+    "qrFile": "Andrés_.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493516209967?text=Hola%20Andr%C3%A9s%20%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "1jt1ih2c",
+    "nombre": "Antonella Zechin ",
+    "telefono": 543512067139,
+    "numeroSorteo": 3,
+    "qrFile": "Antonella_Zechin_.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493512067139?text=Hola%20Antonella%20Zechin%20%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "wcl8f8pj",
+    "nombre": "Brisa",
+    "telefono": 543834013319,
+    "numeroSorteo": 4,
+    "qrFile": "Brisa.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493834013319?text=Hola%20Brisa%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "rj7hwwb1",
+    "nombre": "Cristhian Tamara",
+    "telefono": 543512175117,
+    "numeroSorteo": 5,
+    "qrFile": "Cristhian_Tamara.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493512175117?text=Hola%20Cristhian%20Tamara%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "5m9vo6xi",
+    "nombre": "David ",
+    "telefono": 543885977078,
+    "numeroSorteo": 6,
+    "qrFile": "David_.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493885977078?text=Hola%20David%20%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "8v7dd10u",
+    "nombre": "Ellas heredia ",
+    "telefono": 543515169362,
+    "numeroSorteo": 7,
+    "qrFile": "Ellas_heredia_.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493515169362?text=Hola%20Ellas%20heredia%20%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "ue8zn9yg",
+    "nombre": "Emanuel Pérez ",
+    "telefono": 543513721937,
+    "numeroSorteo": 8,
+    "qrFile": "Emanuel_Pérez_.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493513721937?text=Hola%20Emanuel%20P%C3%A9rez%20%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "tlh8a5it",
+    "nombre": "Emilio maldonado",
+    "telefono": 543512387073,
+    "numeroSorteo": 9,
+    "qrFile": "Emilio_maldonado.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493512387073?text=Hola%20Emilio%20maldonado%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "7j3oxez7",
+    "nombre": "Facundo Gaumet",
+    "telefono": 543584185141,
+    "numeroSorteo": 10,
+    "qrFile": "Facundo_Gaumet.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493584185141?text=Hola%20Facundo%20Gaumet%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "e2740ybi",
+    "nombre": "Facundo Villard",
+    "telefono": 543825438378,
+    "numeroSorteo": 11,
+    "qrFile": "Facundo_Villard.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493825438378?text=Hola%20Facundo%20Villard%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "6v8fgwbm",
+    "nombre": "Florencia Ortega Fisogni",
+    "telefono": 543543514704,
+    "numeroSorteo": 12,
+    "qrFile": "Florencia_Ortega_Fisogni.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493543514704?text=Hola%20Florencia%20Ortega%20Fisogni%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "2jd77cl5",
+    "nombre": "Francisco",
+    "telefono": 542994383029,
+    "numeroSorteo": 13,
+    "qrFile": "Francisco.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5492994383029?text=Hola%20Francisco%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "s7flvcxr",
+    "nombre": "Franco",
+    "telefono": 542945532380,
+    "numeroSorteo": 14,
+    "qrFile": "Franco.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5492945532380?text=Hola%20Franco%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "qbdtal28",
+    "nombre": "Hugo",
+    "telefono": 543515744697,
+    "numeroSorteo": 15,
+    "qrFile": "Hugo.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493515744697?text=Hola%20Hugo%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "2sqw51hb",
+    "nombre": "Jere ",
+    "telefono": 543516887222,
+    "numeroSorteo": 16,
+    "qrFile": "Jere_.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493516887222?text=Hola%20Jere%20%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "a6zwfbx1",
+    "nombre": "Jose",
+    "telefono": 543516356806,
+    "numeroSorteo": 17,
+    "qrFile": "Jose.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493516356806?text=Hola%20Jose%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "hp05k23e",
+    "nombre": "Josefina ",
+    "telefono": 543517590508,
+    "numeroSorteo": 18,
+    "qrFile": "Josefina_.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493517590508?text=Hola%20Josefina%20%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "01wimgt5",
+    "nombre": "Juan Cruz Casas ",
+    "telefono": 543513071638,
+    "numeroSorteo": 19,
+    "qrFile": "Juan_Cruz_Casas_.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493513071638?text=Hola%20Juan%20Cruz%20Casas%20%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "wi8nhsnq",
+    "nombre": "Juan pablo",
+    "telefono": 543834248962,
+    "numeroSorteo": 20,
+    "qrFile": "Juan_pablo.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493834248962?text=Hola%20Juan%20pablo%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "0v7z0hc3",
+    "nombre": "Julián Samuel ",
+    "telefono": 543515572792,
+    "numeroSorteo": 21,
+    "qrFile": "Julián_Samuel_.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493515572792?text=Hola%20Juli%C3%A1n%20Samuel%20%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "k3ai5608",
+    "nombre": "Lizzi Salvatiera",
+    "telefono": 543513278515,
+    "numeroSorteo": 22,
+    "qrFile": "Lizzi_Salvatiera.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493513278515?text=Hola%20Lizzi%20Salvatiera%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "ytpshq3w",
+    "nombre": "Lucas ",
+    "telefono": 543513234422,
+    "numeroSorteo": 23,
+    "qrFile": "Lucas_.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493513234422?text=Hola%20Lucas%20%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "hebmpshj",
+    "nombre": "Luciano ",
+    "telefono": 543515282752,
+    "numeroSorteo": 24,
+    "qrFile": "Luciano_.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493515282752?text=Hola%20Luciano%20%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "ez71jcv1",
+    "nombre": "Mateo",
+    "telefono": 543518794540,
+    "numeroSorteo": 25,
+    "qrFile": "Mateo.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493518794540?text=Hola%20Mateo%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "jjoawj07",
+    "nombre": "Micaela Nahir Ramos ",
+    "telefono": 543517036711,
+    "numeroSorteo": 26,
+    "qrFile": "Micaela_Nahir_Ramos_.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493517036711?text=Hola%20Micaela%20Nahir%20Ramos%20%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "4zinyjpc",
+    "nombre": "Milagros zamudio",
+    "telefono": 543512225872,
+    "numeroSorteo": 27,
+    "qrFile": "Milagros_zamudio.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493512225872?text=Hola%20Milagros%20zamudio%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "een8hbod",
+    "nombre": "Montenegro Micaela ",
+    "telefono": 543516327107,
+    "numeroSorteo": 28,
+    "qrFile": "Montenegro_Micaela_.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493516327107?text=Hola%20Montenegro%20Micaela%20%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "r0tg3l82",
+    "nombre": "Nicolas",
+    "telefono": 543512370636,
+    "numeroSorteo": 29,
+    "qrFile": "Nicolas.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493512370636?text=Hola%20Nicolas%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "k4t8plkb",
+    "nombre": "Nilson",
+    "telefono": 543837690656,
+    "numeroSorteo": 30,
+    "qrFile": "Nilson.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493837690656?text=Hola%20Nilson%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "w318vpa1",
+    "nombre": "Pablo Morales ",
+    "telefono": 543875110155,
+    "numeroSorteo": 31,
+    "qrFile": "Pablo_Morales_.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493875110155?text=Hola%20Pablo%20Morales%20%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "u8foqumt",
+    "nombre": "Paul ",
+    "telefono": 543517729071,
+    "numeroSorteo": 32,
+    "qrFile": "Paul_.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493517729071?text=Hola%20Paul%20%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "oltwrktr",
+    "nombre": "Ramiro Bravo Coll ",
+    "telefono": 543804792729,
+    "numeroSorteo": 33,
+    "qrFile": "Ramiro_Bravo_Coll_.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493804792729?text=Hola%20Ramiro%20Bravo%20Coll%20%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "fpn9n18s",
+    "nombre": "Rocio",
+    "telefono": 543517539268,
+    "numeroSorteo": 34,
+    "qrFile": "Rocio.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493517539268?text=Hola%20Rocio%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "d2t6pxzg",
+    "nombre": "Rocio",
+    "telefono": 542976241137,
+    "numeroSorteo": 35,
+    "qrFile": "Rocio.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5492976241137?text=Hola%20Rocio%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "q1scwda6",
+    "nombre": "Santiago ",
+    "telefono": 543584829380,
+    "numeroSorteo": 36,
+    "qrFile": "Santiago_.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493584829380?text=Hola%20Santiago%20%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "al0mhacg",
+    "nombre": "Santiago ",
+    "telefono": 543834226008,
+    "numeroSorteo": 37,
+    "qrFile": "Santiago_.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493834226008?text=Hola%20Santiago%20%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "8skdoz6p",
+    "nombre": "Selene",
+    "telefono": 543572582882,
+    "numeroSorteo": 38,
+    "qrFile": "Selene.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493572582882?text=Hola%20Selene%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "9itvd70v",
+    "nombre": "Tomás",
+    "telefono": 543516692480,
+    "numeroSorteo": 39,
+    "qrFile": "Tomás.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493516692480?text=Hola%20Tom%C3%A1s%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "rv4kn8ho",
+    "nombre": "Zaira Jalil",
+    "telefono": 543834839251,
+    "numeroSorteo": 40,
+    "qrFile": "Zaira_Jalil.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5493834839251?text=Hola%20Zaira%20Jalil%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  },
+  {
+    "id": "o1fg24to",
+    "nombre": "Ziara",
+    "telefono": 542804036471,
+    "numeroSorteo": 41,
+    "qrFile": "Ziara.png",
+    "checkinURL": "https://project-y86k.onrender.com/checkin/{id}",
+    "whatsappLink": "https://wa.me/5492804036471?text=Hola%20Ziara%2C%20este%20es%20tu%20QR%20para%20el%20evento%20ESDEC%3A%0Ahttps%3A%2F%2Fproject-y86k.onrender.com%2Fcheckin%2F%7Bid%7D"
+  }
+]

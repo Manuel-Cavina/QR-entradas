@@ -1,64 +1,91 @@
-const express = require('express');
-const cors = require('cors');
-const fs = require('fs');
-const path = require('path');
+const express = require("express");
+const cors = require("cors");
+const fs = require("fs");
+const path = require("path");
 
 const app = express();
-const PORT = process.env.PORT || 4000;
 
-// middlewares
 app.use(cors());
 app.use(express.json());
 
 let users = [];
 
-// 🔥 CARGA DE ARCHIVO
 try {
-  const filePath = path.join(__dirname, 'participantes.json');
-  const raw = fs.readFileSync(filePath, 'utf-8');
+  const filePath = path.join(__dirname, "participantes_final.json");
+  users = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
-  users = JSON.parse(raw).map(u => ({
+  // Inicializar campos si no existen
+  users = users.map(u => ({
     ...u,
-    checkedIn: u.checkedIn || false
+    checkedIn: u.checkedIn || false,
+    combo: u.combo || {
+      bebidaCaliente: "",
+      bebidaFria: "",
+      comida: ""
+    }
   }));
 
-  console.log("✅ Participantes cargados:", users.length);
+  console.log("Participantes cargados:", users.length);
 } catch (err) {
-  console.log("❌ Error cargando participantes.json:");
-  console.log(err.message);
+  console.log("Error cargando participantes:", err.message);
 }
 
-// 🔹 VER LISTA
-app.get('/users', (req, res) => {
+// 🔹 LISTA
+app.get("/users", (req, res) => {
   res.json(users);
 });
 
 // 🔹 CHECK-IN
-app.get('/checkin/:id', (req, res) => {
-  const user = users.find(u => String(u.id) === String(req.params.id));
+app.get("/checkin/:id", (req, res) => {
+  const user = users.find(u => u.id === req.params.id);
 
   if (!user) {
-    return res.json({ status: 'error', message: 'No encontrado' });
+    return res.json({ status: "error", message: "No encontrado" });
   }
 
   if (user.checkedIn) {
-    return res.json({ status: 'warning', message: 'Ya registrado', user });
+    return res.json({ status: "warning", message: "Ya registrado", user });
   }
 
   user.checkedIn = true;
 
   return res.json({
-    status: 'success',
-    message: 'Check-in OK',
+    status: "success",
+    message: "Check-in OK",
     user
   });
 });
 
-// 🔹 TEST
-app.get('/', (req, res) => {
-  res.send("Backend funcionando 🚀");
+// 🔹 GUARDAR COMBO
+app.post("/combo/:id", (req, res) => {
+  const user = users.find(u => u.id === req.params.id);
+
+  if (!user) {
+    return res.status(404).json({ error: "No encontrado" });
+  }
+
+  user.combo = req.body;
+
+  return res.json({
+    status: "success",
+    user
+  });
 });
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en puerto ${PORT}`);
+// 🔹 RESET
+app.post("/reset", (req, res) => {
+  users.forEach(u => {
+    u.checkedIn = false;
+    u.combo = {
+      bebidaCaliente: "",
+      bebidaFria: "",
+      comida: ""
+    };
+  });
+
+  res.json({ message: "Evento reiniciado" });
+});
+
+app.listen(4000, () => {
+  console.log("Servidor corriendo en http://localhost:4000");
 });

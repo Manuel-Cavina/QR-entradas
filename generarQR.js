@@ -9,7 +9,7 @@ const sheet = workbook.Sheets[workbook.SheetNames[0]];
 const data = XLSX.utils.sheet_to_json(sheet);
 
 // 📂 Crear carpeta output
-const outputDir = path.join(__dirname, 'output');
+const outputDir = path.join(__dirname, 'frontend/public/qrs');
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir);
 }
